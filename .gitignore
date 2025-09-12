@@ -1,0 +1,95 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Python / Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+db.sqlite3
+.env
+.env.local
+venv/
+backend/venv/
+*.log
+
+# React / Vite
+node_modules/
+portfolio/node_modules/
+dist/
+dist-ssr/
+.nuxt/
+.cache/
+.vercel/
+
+# Build outputs
+build/
+out/
+.next/
+public/build/
+public/dist/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# IDE and OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Coverage
+coverage/
+*.lcov
+
+# Local development
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python / Django
+venv/
+backend/venv/
+__pycache__/
+*.pyc
+db.sqlite3
+
+# Node / React
+node_modules/
+portfolio/node_modules/
+
+# Env files
+.env
+.env.local

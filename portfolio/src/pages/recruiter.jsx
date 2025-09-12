@@ -3,11 +3,11 @@ import Nav from '../components/Nav'
 
  function Recruiter () {
 
-    const scrollto = (id) => {
+    const scrollToSection = (id) => {
 
         const element = document.getElementById(id); 
         if (element) {
-            element.scrollIntoView({behaviour: "smooth"});
+            element.scrollIntoView({behavior: "smooth"});
         }
             
         };
@@ -17,30 +17,33 @@ import Nav from '../components/Nav'
         
         <>
 
-        <Nav>
-        <ul className='nav-links'>
-          <li><button onClick={() => scrollTo('home')}>Home</button></li>
-          <li><button onClick={() => scrollTo('experience')}>Experience</button></li>
-          <li><button onClick={() => scrollTo('skills')}>Skills</button></li>
-          <li><button onClick={() => scrollTo('skills')}>Education</button></li>
-          <li><button onClick={() => scrollTo('skills')}>Contact</button></li>
+          <Nav>
+        <ul className="nav-links">
+          <li><button onClick={() => scrollToSection('home')}>⇧</button></li>
+          <li><button onClick={() => scrollToSection('experience')}>Experience</button></li>
+          <li><button onClick={() => scrollToSection('education')}>Education</button></li>
+          <li><button onClick={() => scrollToSection('skills')}>Skills</button></li>
+          <li><button onClick={() => scrollToSection('projects')}>Projects</button></li>
         </ul>
       </Nav>
 
-      <section className='banner'>
+      <section id="home" className="banner">
         
         <div className="content">
             <h1 className="title">Rahul Kadam </h1>
             <p className="description">Full Stack Developer with 5+ years of experience building scalable web applications. Passionate about clean code and user-centered design.</p>
             <div className="buttons">
+                <a href="/resume/KADAM-RAHUL_CV.pdf" download="KADAM-RAHUL_CV.pdf">
                 <button className="btn btn-primary"><i className="fas fa-download"></i> Download Resume</button>
-                <button className="btn btn-secondary"><i className="fas fa-envelope"></i> Contact Me</button>
+                </a>
+                <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}><i className="fas fa-envelope"></i> Contact Me</button>
             </div>
         </div>
 
       </section>
 
       <section className="content-section">
+
         <h2 className="section-title">Personal Statement</h2>
         <div className="profile-details">
             <img src="/images/image.jpg" alt="Profile Photo" className="profile-image " />
@@ -64,9 +67,11 @@ import Nav from '../components/Nav'
                 </div>
             </div>
         </div>
+
     </section>
 
-    <section className="content-section">
+    <section id="experience" className="content-section">
+
         <h2 className="section-title">Experience</h2>
         <div className="card-row">
             <div className="info-card exp-card">
@@ -85,9 +90,11 @@ import Nav from '../components/Nav'
                 <p className="card-description">Created responsive and interactive user interfaces</p>
             </div>
         </div>
+
     </section>
 
-    <section className="content-section">
+    <section id="education" className="content-section">
+
         <h2 className="section-title">Education</h2>
         <div className="card-row">
             <div className="info-card education-card">
@@ -101,9 +108,11 @@ import Nav from '../components/Nav'
                 <p className="card-description">Graduated with Honors</p>
             </div>
         </div>
+
     </section>
 
-    <section className="content-section">
+    <section id="skills" className="content-section">
+
         <h2 className="section-title">Skills & Expertise</h2>
         <div className="card-row">
             <div className="info-card skill-card">
@@ -125,7 +134,71 @@ import Nav from '../components/Nav'
                 <h3 className="card-title">Python</h3>
             </div>
         </div>
+
     </section>
+
+    <section id="projects" className="content-section">
+
+            <h2 className="section-title">Personal Projects</h2>
+            <div className="card-row">
+                <div className="info-card project-card">
+                    <h3 className="card-title">E-Commerce Platform</h3>
+                    <p className="card-description">Full-stack e-commerce solution with React, Node.js, and MongoDB</p>
+                    <p className="card-description"><i className="fas fa-code"></i> JavaScript, React, Node.js</p>
+                </div>
+                <div className="info-card project-card">
+                    <h3 className="card-title">Task Management App</h3>
+                    <p className="card-description">Productivity application with drag-and-drop functionality</p>
+                    <p className="card-description"><i className="fas fa-code"></i> TypeScript, React, Firebase</p>
+                </div>
+                <div className="info-card project-card">
+                    <h3 className="card-title">Weather Dashboard</h3>
+                    <p className="card-description">Real-time weather application with forecast data</p>
+                    <p className="card-description"><i className="fas fa-code"></i> JavaScript, API Integration</p>
+                </div>
+                <div className="info-card project-card">
+                    <h3 className="card-title">Fitness Tracker</h3>
+                    <p className="card-description">Mobile application for tracking workouts and progress</p>
+                    <p className="card-description"><i className="fas fa-code"></i> React Native, Redux</p>
+                </div>
+            </div>
+
+      </section>
+
+        <section id="contact" className="footer">
+  <h2 className="section-title">Get In Touch</h2>
+  <p>I'd love to hear from you!</p>
+
+
+  <div className="social-links">
+    {/* LinkedIn */}
+    <a href="https://linkedin.com/in/rahul-kadam-800b811a2" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-linkedin fa-2x"></i>
+    </a>
+
+    {/* GitHub */}
+    <a href="https://github.com/1RaHuL6" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-github fa-2x"></i>
+    </a>
+
+    {/* Twitter/X */}
+    <a href="https://twitter.com/RAhul16kadam" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-x-twitter fa-2x"></i>
+    </a>
+
+    {/* Instagram */}
+    <a href="https://instagram.com/rahul_1_6__" target="_blank" rel="noopener noreferrer">
+      <i className="fab fa-instagram fa-2x"></i>
+    </a>
+
+    {/* Email */}
+    <a href="mailto:16rahulkadam16@gmail.com">
+      <i className="fas fa-envelope fa-2x"></i>
+    </a>
+  </div>
+</section>
+
+    
 
         </>
 
