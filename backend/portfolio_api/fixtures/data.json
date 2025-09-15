@@ -1,0 +1,163 @@
+[
+  {
+    "model": "portfolio_api.Profile",
+    "pk": 1,
+    "fields": {
+      "name": "Rahul Kadam",
+      "title": "Aspiring Junior Software Engineer",
+      "description": "Passionate about clean code and user-centered design.",
+      "email": "16rahulkadam16@gmail.com"
+    }
+  },
+  {
+    "model": "portfolio_api.Experience",
+    "pk": 1,
+    "fields": {
+      "role": "Project Engineer",
+      "company": "Wipro Technologies",
+      "start_date": "2022-05-25",
+      "end_date": "2024-07-22",
+      "currently_working": false,
+      "description": "Application support engineer"
+    }
+  },
+  {
+    "model": "portfolio_api.Experience",
+    "pk": 2,
+    "fields": {
+      "role": "Online Service Colleague",
+      "company": "ASDA",
+      "start_date": "2024-11-25",
+      "end_date": null,
+      "currently_working": true,
+      "description": "Part time"
+    }
+  },
+  {
+    "model": "portfolio_api.Education",
+    "pk": 1,
+    "fields": {
+      "degree": "Bachelor of Engineering",
+      "institution": "Mumbai University",
+      "start_year": 2018,
+      "end_year": 2022,
+      "details": "Some details....."
+    }
+  },
+  {
+    "model": "portfolio_api.Education",
+    "pk": 2,
+    "fields": {
+      "degree": "MSc Advanced Computer Science",
+      "institution": "University of Sussex",
+      "start_year": 2024,
+      "end_year": 2025,
+      "details": "Currently pursuing master's in advanced computer science."
+    }
+  },
+  {
+    "model": "portfolio_api.Skill",
+    "pk": 1,
+    "fields": {
+      "name": "Python",
+      "proficiency": 2,
+      "category": "backend"
+    }
+  },
+  {
+    "model": "portfolio_api.Skill",
+    "pk": 2,
+    "fields": {
+      "name": "React",
+      "proficiency": 2,
+      "category": "frontend"
+    }
+  },
+  {
+    "model": "portfolio_api.Skill",
+    "pk": 3,
+    "fields": {
+      "name": "Git/GitHub",
+      "proficiency": 3,
+      "category": "devops"
+    }
+  },
+  {
+    "model": "portfolio_api.Skill",
+    "pk": 4,
+    "fields": {
+      "name": "PostgreSQL",
+      "proficiency": 3,
+      "category": "database"
+    }
+  },
+  {
+    "model": "portfolio_api.Project",
+    "pk": 1,
+    "fields": {
+      "title": "Analyze_It",
+      "description": "Data visualisation tool for University of Sussex",
+      "tech_stack": "Django, JavaScript",
+      "image_url": "/images/recruiter.jpg",
+      "github_url": "https://github.com/1RaHuL6/Analyze_It",
+      "live_demo_url": "https://analyze-it-67dl.onrender.com/"
+    }
+  },
+  {
+    "model": "portfolio_api.Project",
+    "pk": 2,
+    "fields": {
+      "title": "Pay-Up",
+      "description": "Online payment tool",
+      "tech_stack": "Django, JavaScript",
+      "image_url": "/images/recruiter.jpg",
+      "github_url": "https://github.com/1RaHuL6/Payup-App",
+      "live_demo_url": "https://analyze-it-67dl.onrender.com/"
+    }
+  },
+  {
+    "model": "portfolio_api.SocialLink",
+    "pk": 1,
+    "fields": {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/rahul-kadam-800b811a2",
+      "icon_class": "fab fa-linkedin fa-2x"
+    }
+  },
+  {
+    "model": "portfolio_api.SocialLink",
+    "pk": 2,
+    "fields": {
+      "platform": "github",
+      "url": "https://github.com/1RaHuL6",
+      "icon_class": "fab fa-github fa-2x"
+    }
+  },
+  {
+    "model": "portfolio_api.SocialLink",
+    "pk": 3,
+    "fields": {
+      "platform": "twitter",
+      "url": "https://twitter.com/RAhul16kadam",
+      "icon_class": "fab fa-x-twitter fa-2x"
+    }
+  },
+  {
+    "model": "portfolio_api.SocialLink",
+    "pk": 4,
+    "fields": {
+      "platform": "instagram",
+      "url": "https://instagram.com/rahul_1_6__",
+      "icon_class": "fab fa-instagram fa-2x"
+    }
+  },
+  {
+    "model": "portfolio_api.SocialLink",
+    "pk": 5,
+    "fields": {
+      "platform": "email",
+      "url": "mailto:16rahulkadam16@gmail.com",
+      "icon_class": "fas fa-envelope fa-2x"
+    }
+  }
+]
