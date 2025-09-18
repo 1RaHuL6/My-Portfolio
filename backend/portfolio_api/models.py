@@ -17,6 +17,7 @@ class Experience(models.Model):
     end_date = models.DateField(null=True, blank=True)
     currently_working = models.BooleanField(default=False)
     description = models.TextField()
+    image_url = models.URLField(blank=True)
 
     def __str__(self):
         return f"{self.role} at {self.company}"
@@ -27,6 +28,7 @@ class Education(models.Model):
     start_year = models.IntegerField()
     end_year = models.IntegerField()
     details = models.TextField(blank=True)
+    image_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.degree
@@ -42,6 +44,7 @@ class Skill(models.Model):
     name = models.CharField(max_length=50)
     proficiency = models.IntegerField(help_text="1-5 scale") 
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
+    image_url = models.URLField(blank=True)
 
     def __str__(self):
         return self.name
@@ -69,6 +72,7 @@ class SocialLink(models.Model):
     platform = models.CharField(max_length=20, choices=PLATFORM_CHOICES)
     url = models.URLField()
     icon_class = models.CharField(max_length=50, default='fas fa-link')  
+    
 
     def __str__(self):
         return self.platform

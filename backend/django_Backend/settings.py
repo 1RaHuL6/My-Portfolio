@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'portfolio_api'
+    'portfolio_api',
+    
 ]
 
 MIDDLEWARE = [
@@ -53,9 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173", 
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5173", 
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'django_Backend.urls'
 
