@@ -12,15 +12,17 @@ import { useState, useEffect } from 'react';
   const [socialLinks, setSocialLinks] = useState([]);
 
 useEffect (() => {
+    const API_URL = import.meta.env.VITE_API_URL;
+
     const fetchData =async () => {
         try {
             const responses = await Promise.all([
-          fetch('http://localhost:8000/api/profile/'),
-          fetch('http://localhost:8000/api/experience/'),
-          fetch('http://localhost:8000/api/projects/'),
-          fetch('http://localhost:8000/api/education/'),
-          fetch('http://127.0.0.1:8000/api/skill/'),
-          fetch('http://localhost:8000/api/socialLinks/')
+                fetch(`${API_URL}/api/profile/`),
+                fetch(`${API_URL}/api/experience/`),
+                fetch(`${API_URL}/api/projects/`),
+                fetch(`${API_URL}/api/education/`),
+                fetch(`${API_URL}/api/skill/`),
+                fetch(`${API_URL}/api/socialLinks/`)
           
             ]);
             const [profileData, expData, projData, eduData, skillData, linkData] = 
