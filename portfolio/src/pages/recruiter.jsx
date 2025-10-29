@@ -83,7 +83,7 @@ useEffect (() => {
         
         <div className="content">
             <h1 className="title">{profile.name} </h1>
-            <p className="description">{profile.description}</p>
+            <p className="description">Building scalable backend systems and full-stack applications.</p>
             <div className="buttons">
                 <a href="/resume/KADAM-RAHUL_CV.pdf" download="KADAM-RAHUL_CV.pdf">
                 <button className="btn btn-primary"><i className="fas fa-download"></i> Download Resume</button>
@@ -100,20 +100,20 @@ useEffect (() => {
         <div className="profile-details">
             <img src="/images/image.jpg" alt="Profile Photo" className="profile-image " />
             <div className="profile-info">
-                <h2 className="profile-name">{profile.name}</h2>
-                <p className="profile-title">Full Stack Developer | JavaScript Expert</p>
-                <p className="profile-bio">I am a passionate developer with expertise in JavaScript, React, Node.js, and cloud technologies. I thrive in agile environments and enjoy solving complex problems with elegant solutions. My goal is to create applications that not only meet business requirements but also provide exceptional user experiences.</p>
+                {/* <h2 className="profile-name">{profile.name}</h2> */}
+                <p className="profile-title">Full Stack Developer | Python (Django) with React Frontend Experience</p>
+                <p className="profile-bio">I am a highly motivated software engineer graduate with interest in backend and full-stack development. Skilled in Python, Django, React, and PostgreSQL. I build clean, scalable, and maintainable applications that solve real problems. My background spans academic projects and industry experience at Wipro technologies, where I developed strong problem-solving and system troubleshooting/maintenance skills. Passionate about technology, I thrive in Agile environments and enjoy deploying reliable solutions to the cloud.</p>
                 <div className="stats">
                     <div className="stat-item">
-                        <div className="stat-value">5+</div>
+                        <div className="stat-value">2</div>
                         <div className="stat-label">Years Experience</div>
                     </div>
                     <div className="stat-item">
-                        <div className="stat-value">24</div>
-                        <div className="stat-label">Projects</div>
+                        <div className="stat-value">5</div>
+                        <div className="stat-label">Academic Projects</div>
                     </div>
                     <div className="stat-item">
-                        <div className="stat-value">12</div>
+                        <div className="stat-value">2</div>
                         <div className="stat-label">Certifications</div>
                     </div>
                 </div>
