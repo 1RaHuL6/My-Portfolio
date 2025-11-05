@@ -2,7 +2,7 @@ import Nav from '../components/Nav'
 import { useState, useEffect } from 'react';
 
  function Recruiter () {
-
+  
 
   const [profile, setProfile] = useState(null);
   const [experience, setExperience] = useState([]);
@@ -10,6 +10,12 @@ import { useState, useEffect } from 'react';
   const [education, setEducation] = useState([]);
   const [skills, setSkills] = useState([]);
   const [socialLinks, setSocialLinks] = useState([]);
+  const [showLeadModal, setShowLeadModal] = useState(true);
+  const [leadName, setLeadName] = useState('');
+  const [leadEmail, setLeadEmail] = useState('');
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [leadSubmitted, setLeadSubmitted] = useState(false);
+  const [leadError, setLeadError] = useState('');
 
 useEffect (() => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -62,12 +68,65 @@ useEffect (() => {
         }
             
         };
-
+ 
 
     return (
 
         
         <>
+        {showLeadModal && (
+          <div style={modalOverlayStyle}>
+            <div style={modalContentStyle}>
+              <button aria-label="Close" onClick={() => setShowLeadModal(false)} style={closeButtonStyle}>✕</button>
+              <h2 style={modalTitleStyle}>Welcome</h2>
+              <p style={modalSubtitleStyle}>Optionally leave, who was here!</p>
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setLeadError('');
+                  setLeadSubmitting(true);
+                  try {
+                    const API_URL = import.meta.env.VITE_API_URL;
+                    await fetch(`${API_URL}/api/leads/`, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ name: leadName, email: leadEmail })
+                    });
+                    setLeadSubmitted(true);
+                  } catch (err) {
+                    setLeadError('Something went wrong. Please try again later.');
+                  } finally {
+                    setLeadSubmitting(false);
+                  }
+                }}
+                style={formStyle}
+              >
+                <label style={labelStyle}>Name</label>
+                <input
+                  type="text"
+                  value={leadName}
+                  onChange={(e) => setLeadName(e.target.value)}
+                  placeholder="Your name"
+                  style={inputStyle}
+                />
+                <label style={labelStyle}>Email</label>
+                <input
+                  type="email"
+                  value={leadEmail}
+                  onChange={(e) => setLeadEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  style={inputStyle}
+                />
+                <button type="submit" disabled={leadSubmitting} style={submitButtonStyle}>
+                  {leadSubmitting ? 'Submitting...' : 'Submit'}
+                </button>
+                {leadError && <div style={errorTextStyle}>{leadError}</div>}
+                {leadSubmitted && <div style={successTextStyle}>Thanks! Details received.</div>}
+                <div style={wipTextStyle}> ⚠️ Improvements incoming ⚠️ </div>
+              </form>
+            </div>
+          </div>
+        )}
          
 
           <Nav>
@@ -353,3 +412,107 @@ const navButtonStyle = {
 };
 
 export default Recruiter
+
+const modalOverlayStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundColor: 'rgba(0,0,0,0.85)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 9999
+};
+
+const modalContentStyle = {
+  position: 'relative',
+  width: '90%',
+  maxWidth: '420px',
+  background: '#141414',
+  color: '#fff',
+  borderRadius: '8px',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+  padding: '24px 24px 28px',
+  border: '1px solid #2e2e2e'
+};
+
+const closeButtonStyle = {
+  position: 'absolute',
+  top: '10px',
+  right: '10px',
+  background: '#e50914',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '50%',
+  width: '32px',
+  height: '32px',
+  cursor: 'pointer',
+  fontSize: '16px',
+  lineHeight: '32px'
+};
+
+const modalTitleStyle = {
+  margin: 0,
+  marginBottom: '4px',
+  fontSize: '20px',
+  fontWeight: 700
+};
+
+const modalSubtitleStyle = {
+  margin: 0,
+  marginBottom: '16px',
+  color: '#b3b3b3',
+  fontSize: '14px'
+};
+
+const formStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px'
+};
+
+const labelStyle = {
+  fontSize: '12px',
+  color: '#b3b3b3'
+};
+
+const inputStyle = {
+  background: '#2b2b2b',
+  color: '#fff',
+  border: '1px solid #3a3a3a',
+  borderRadius: '4px',
+  padding: '10px 12px',
+  outline: 'none'
+};
+
+const submitButtonStyle = {
+  marginTop: '6px',
+  background: '#e50914',
+  color: '#fff',
+  border: 'none',
+  borderRadius: '4px',
+  padding: '10px 12px',
+  cursor: 'pointer',
+  fontWeight: 600
+};
+
+const errorTextStyle = {
+  marginTop: '6px',
+  color: '#ff6b6b',
+  fontSize: '12px'
+};
+
+const successTextStyle = {
+  marginTop: '6px',
+  color: '#46d369',
+  fontSize: '12px'
+};
+
+const wipTextStyle = {
+  marginTop: '10px',
+  color: '#b3b3b3',
+  fontSize: '12px',
+  textAlign: 'center'
+};

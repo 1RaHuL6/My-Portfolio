@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Experience, Education, Skill, Project, SocialLink
+from .models import Profile, Experience, Education, Skill, Project, SocialLink, VisitorLead
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,3 +30,9 @@ class SocialLinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialLink
         fields = '__all__'
+
+
+class VisitorLeadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VisitorLead
+        fields = ['id', 'name', 'email', 'created_at']

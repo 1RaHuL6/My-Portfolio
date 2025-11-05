@@ -76,3 +76,15 @@ class SocialLink(models.Model):
 
     def __str__(self):
         return self.platform
+
+
+class VisitorLead(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField(blank=True)
+    user_agent = models.TextField(blank=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        display = self.email or self.name or "Anonymous Visitor"
+        return f"Lead: {display}"
