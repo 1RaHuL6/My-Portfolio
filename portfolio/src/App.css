@@ -40,3 +40,170 @@
 .read-the-docs {
   color: #888;
 }
+
+/* --- Cold Start Warning Styles --- */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cold-start-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Use your app's main background color here, or keep dark for contrast */
+    background-color: #1a1a1a; 
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.cold-start-content {
+    max-width: 500px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.cold-start-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #FFD700; /* Yellow/Gold for high visibility */
+}
+
+.cold-start-text {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.cold-start-secondary-text {
+    font-size: 0.9em;
+    color: #999;
+    font-style: italic;
+}
+
+.spinner {
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top: 5px solid #007bff; /* A prominent color for the loading indicator */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1.5s linear infinite;
+    margin: 30px auto;
+}
+
+.error-message {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 50px;
+}
+
+/* --- Modal Styles --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  background: #141414;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  padding: 24px 24px 28px;
+  border: 1px solid #2e2e2e
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e50914; /* Netflix red theme */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 32px;
+}
+
+.modal-title {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal-subtitle {
+  margin: 0;
+  margin-bottom: 16px;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lead-label {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+.lead-input {
+  background: #2b2b2b;
+  color: #fff;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.submit-button {
+  margin-top: 6px;
+  background: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.error-text {
+  margin-top: 6px;
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+.success-text {
+  margin-top: 6px;
+  color: #46d369;
+  font-size: 12px;
+}
+
+.wip-text {
+  margin-top: 10px;
+  color: #b3b3b3;
+  font-size: 12px;
+  text-align: center;
+}

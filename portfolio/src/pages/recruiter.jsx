@@ -16,6 +16,8 @@ import { useState, useEffect } from 'react';
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [leadSubmitted, setLeadSubmitted] = useState(false);
   const [leadError, setLeadError] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
 useEffect (() => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -31,7 +33,13 @@ useEffect (() => {
                 fetch(`${API_URL}/api/socialLinks/`)
           
             ]);
-            const [profileData, expData, projData, eduData, skillData, linkData] = 
+
+            const failedResponse = responses.find(res => !res.ok);
+            if (failedResponse) {
+                throw new Error(`API call failed with status: ${failedResponse.status}`);
+            }
+
+          const [profileData, expData, projData, eduData, skillData, linkData] = 
           await Promise.all(responses.map(res => res.json()));
 
         setProfile(profileData);
@@ -43,19 +51,44 @@ useEffect (() => {
         }
         catch (error) {
             console.error("Error fetching data:", error);
-
+            setError("Failed to load portfolio data."); 
         }
+        finally {setIsLoading(false); // Stop loading on error} 
+          }
+
 
     };
      fetchData(); // Call the async function
   }, []);
 
-  
-
-
-   if (!profile) {
-    return <div style={{ color: 'white' }}>Loading...</div>;
+  if (isLoading) {
+    return (
+        <div className="cold-start-container">
+            <Nav />
+            <div className="cold-start-content">
+                <h1 className="cold-start-title">🚀 Warming Up the Backend...</h1>
+                <div className="spinner"></div>
+                <p className="cold-start-text">
+                    Thanks for your patience! This section is powered by a free-tier backend service. 
+                    It is currently undergoing a cold start and may take 60 to 90 seconds to wake up and connect to the database.
+                </p>
+                <p className="cold-start-secondary-text">
+                    *(This limitation is a cost-saving measure, not a fault. Your understanding is appreciated!)*
+                </p>
+            </div>
+        </div>
+    );
   }
+  
+    // --- ERROR HANDLER (Optional but recommended) ---
+    if (error) {
+        return <div style={{ color: 'red', textAlign: 'center', padding: '50px' }}>Error: {error}</div>;
+    }
+
+
+  //  if (!profile) {
+  //   return <div style={{ color: 'white' }}>Loading...</div>;
+  // }
 
 
 
@@ -75,11 +108,11 @@ useEffect (() => {
         
         <>
         {showLeadModal && (
-          <div style={modalOverlayStyle}>
-            <div style={modalContentStyle}>
-              <button aria-label="Close" onClick={() => setShowLeadModal(false)} style={closeButtonStyle}>✕</button>
-              <h2 style={modalTitleStyle}>Welcome</h2>
-              <p style={modalSubtitleStyle}>Optionally leave, who was here!</p>
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <button aria-label="Close" onClick={() => setShowLeadModal(false)} className="close-button">✕</button>
+              <h2 className="modal-title">Welcome</h2>
+              <p className="modal-subtitle">Optionally leave, who was here!</p>
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();
@@ -99,30 +132,30 @@ useEffect (() => {
                     setLeadSubmitting(false);
                   }
                 }}
-                style={formStyle}
+                className="lead-form"
               >
-                <label style={labelStyle}>Name</label>
+                <label className="lead-label">Name</label>
                 <input
                   type="text"
                   value={leadName}
                   onChange={(e) => setLeadName(e.target.value)}
                   placeholder="Your name"
-                  style={inputStyle}
+                  className="lead-input"
                 />
-                <label style={labelStyle}>Email</label>
+                <label className="lead-label">Email</label>
                 <input
                   type="email"
                   value={leadEmail}
                   onChange={(e) => setLeadEmail(e.target.value)}
                   placeholder="you@example.com"
-                  style={inputStyle}
+                  className="lead-input"
                 />
-                <button type="submit" disabled={leadSubmitting} style={submitButtonStyle}>
+                <button type="submit" disabled={leadSubmitting} className="submit-button">
                   {leadSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
-                {leadError && <div style={errorTextStyle}>{leadError}</div>}
-                {leadSubmitted && <div style={successTextStyle}>Thanks! Details received.</div>}
-                <div style={wipTextStyle}> ⚠️ Improvements incoming ⚠️ </div>
+                {leadError && <div className="error-text">{leadError}</div>}
+                {leadSubmitted && <div className="success-text">Thanks! Details received.</div>}
+                <div className="wip-text"> ⚠️ Improvements incoming ⚠️ </div>
               </form>
             </div>
           </div>
@@ -402,117 +435,165 @@ useEffect (() => {
 }
 
 
-const navButtonStyle = {
-  background: 'none',
-  border: 'none',
-  color: 'white',
-  cursor: 'pointer',
-  fontSize: '16px',
-  textDecoration: 'underline',
-};
+
 
 export default Recruiter
 
-const modalOverlayStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backgroundColor: 'rgba(0,0,0,0.85)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: 9999
-};
+// const navButtonStyle = {
+//   background: 'none',
+//   border: 'none',
+//   color: 'white',
+//   cursor: 'pointer',
+//   fontSize: '16px',
+//   textDecoration: 'underline',
+// };
+// const coldStartContainerStyle = {
+//     minHeight: '100vh',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor: '#1a1a1a', 
+//     color: 'white',
+//     padding: '20px',
+//     textAlign: 'center',
+// };
 
-const modalContentStyle = {
-  position: 'relative',
-  width: '90%',
-  maxWidth: '420px',
-  background: '#141414',
-  color: '#fff',
-  borderRadius: '8px',
-  boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
-  padding: '24px 24px 28px',
-  border: '1px solid #2e2e2e'
-};
+// const coldStartContentStyle = {
+//     maxWidth: '500px',
+//     paddingTop: '50px',
+//     paddingBottom: '50px',
+// };
 
-const closeButtonStyle = {
-  position: 'absolute',
-  top: '10px',
-  right: '10px',
-  background: '#e50914',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '50%',
-  width: '32px',
-  height: '32px',
-  cursor: 'pointer',
-  fontSize: '16px',
-  lineHeight: '32px'
-};
+// const coldStartTitleStyle = {
+//     fontSize: '2em',
+//     marginBottom: '20px',
+//     color: '#FFD700', // Gold/Yellow for visibility
+// };
 
-const modalTitleStyle = {
-  margin: 0,
-  marginBottom: '4px',
-  fontSize: '20px',
-  fontWeight: 700
-};
+// const coldStartTextStyle = {
+//     fontSize: '1.1em',
+//     lineHeight: '1.5',
+//     marginBottom: '10px',
+//     color: '#ccc',
+// };
 
-const modalSubtitleStyle = {
-  margin: 0,
-  marginBottom: '16px',
-  color: '#b3b3b3',
-  fontSize: '14px'
-};
+// const coldStartSecondaryTextStyle = {
+//     fontSize: '0.9em',
+//     color: '#999',
+//     fontStyle: 'italic',
+// };
 
-const formStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '10px'
-};
+// // CSS for a simple loading spinner
+// const spinnerStyle = {
+//     border: '5px solid rgba(255, 255, 255, 0.2)',
+//     borderTop: '5px solid #007bff', /* Monzo-like color for a professional look */
+//     borderRadius: '50%',
+//     width: '50px',
+//     height: '50px',
+//     animation: 'spin 1.5s linear infinite',
+//     margin: '30px auto',
+// };
+// const modalOverlayStyle = {
+//   position: 'fixed',
+//   top: 0,
+//   left: 0,
+//   width: '100%',
+//   height: '100%',
+//   backgroundColor: 'rgba(0,0,0,0.85)',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   zIndex: 9999
+// };
 
-const labelStyle = {
-  fontSize: '12px',
-  color: '#b3b3b3'
-};
+// const modalContentStyle = {
+//   position: 'relative',
+//   width: '90%',
+//   maxWidth: '420px',
+//   background: '#141414',
+//   color: '#fff',
+//   borderRadius: '8px',
+//   boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+//   padding: '24px 24px 28px',
+//   border: '1px solid #2e2e2e'
+// };
 
-const inputStyle = {
-  background: '#2b2b2b',
-  color: '#fff',
-  border: '1px solid #3a3a3a',
-  borderRadius: '4px',
-  padding: '10px 12px',
-  outline: 'none'
-};
+// const closeButtonStyle = {
+//   position: 'absolute',
+//   top: '10px',
+//   right: '10px',
+//   background: '#e50914',
+//   color: '#fff',
+//   border: 'none',
+//   borderRadius: '50%',
+//   width: '32px',
+//   height: '32px',
+//   cursor: 'pointer',
+//   fontSize: '16px',
+//   lineHeight: '32px'
+// };
 
-const submitButtonStyle = {
-  marginTop: '6px',
-  background: '#e50914',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '4px',
-  padding: '10px 12px',
-  cursor: 'pointer',
-  fontWeight: 600
-};
+// const modalTitleStyle = {
+//   margin: 0,
+//   marginBottom: '4px',
+//   fontSize: '20px',
+//   fontWeight: 700
+// };
 
-const errorTextStyle = {
-  marginTop: '6px',
-  color: '#ff6b6b',
-  fontSize: '12px'
-};
+// const modalSubtitleStyle = {
+//   margin: 0,
+//   marginBottom: '16px',
+//   color: '#b3b3b3',
+//   fontSize: '14px'
+// };
 
-const successTextStyle = {
-  marginTop: '6px',
-  color: '#46d369',
-  fontSize: '12px'
-};
+// const formStyle = {
+//   display: 'flex',
+//   flexDirection: 'column',
+//   gap: '10px'
+// };
 
-const wipTextStyle = {
-  marginTop: '10px',
-  color: '#b3b3b3',
-  fontSize: '12px',
-  textAlign: 'center'
-};
+// const labelStyle = {
+//   fontSize: '12px',
+//   color: '#b3b3b3'
+// };
+
+// const inputStyle = {
+//   background: '#2b2b2b',
+//   color: '#fff',
+//   border: '1px solid #3a3a3a',
+//   borderRadius: '4px',
+//   padding: '10px 12px',
+//   outline: 'none'
+// };
+
+// const submitButtonStyle = {
+//   marginTop: '6px',
+//   background: '#e50914',
+//   color: '#fff',
+//   border: 'none',
+//   borderRadius: '4px',
+//   padding: '10px 12px',
+//   cursor: 'pointer',
+//   fontWeight: 600
+// };
+
+// const errorTextStyle = {
+//   marginTop: '6px',
+//   color: '#ff6b6b',
+//   fontSize: '12px'
+// };
+
+// const successTextStyle = {
+//   marginTop: '6px',
+//   color: '#46d369',
+//   fontSize: '12px'
+// };
+
+// const wipTextStyle = {
+//   marginTop: '10px',
+//   color: '#b3b3b3',
+//   fontSize: '12px',
+//   textAlign: 'center'
+// };
